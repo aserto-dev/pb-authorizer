@@ -1,0 +1,147 @@
+syntax = "proto3";
+
+option go_package = "github.com/aserto-dev/go-authorizer/aserto/authorizer/v2;authorizer"; 
+option csharp_namespace = "Aserto.Authorizer.V2";
+
+package aserto.authorizer.v2;
+
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+import "google/protobuf/struct.proto";
+
+import "aserto/api/v1/policy_context.proto";
+import "aserto/api/v1/identity_context.proto";
+
+
+// OpenAPI annotations.
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+    schemes: HTTPS;
+    consumes: "application/json";
+    produces: "application/json";
+    security_definitions: {
+        security: {
+            key: "TenantID"
+            value: {
+                type: TYPE_API_KEY;
+                in: IN_HEADER;
+                name: "aserto-tenant-id";
+            }
+        }
+        security: {
+            key: "AuthorizerAPIKey"
+            value: {
+                type: TYPE_API_KEY;
+                in: IN_HEADER;
+                name: "authorization";
+            }
+        }
+    }
+    security: {
+		security_requirement: {
+			key: "AuthorizerAPIKey";
+			value: {};
+		}
+		security_requirement: {
+			key: "TenantID";
+			value: {};
+		}
+	}
+};
+
+service Authorizer {
+    rpc DecisionTree (DecisionTreeRequest) returns (DecisionTreeResponse) {
+        option (google.api.http) = {
+            post: "/api/v2/authz/decisiontree"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            tags: "authorizer"
+            summary: "Decision tree"
+            description: "Returns decision tree for given identity context."
+            operation_id: "authorizer.decision_tree"
+            deprecated: false
+            security: {
+                security_requirement: {
+					key: "TenantID";
+					value: {}
+				}
+                security_requirement: {
+					key: "AuthorizerAPIKey";
+					value: {}
+				}
+            }
+        };
+    };
+
+    rpc Is (IsRequest) returns (IsResponse) {
+        option (google.api.http) = {
+            post: "/api/v2/authz/is"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            tags: "authorizer"
+            summary: "Is (authorized)"
+            description: "Determines if identity context is authorized to access the resource guarded by the given policy."
+            operation_id: "authorizer.is"
+            deprecated: false
+            security: {
+                security_requirement: {
+					key: "TenantID";
+					value: {}
+				}
+                security_requirement: {
+					key: "AuthorizerAPIKey";
+					value: {}
+				}
+            }
+        };
+    };
+}
+
+message DecisionTreeRequest {
+    aserto.api.v1.PolicyContext    policy_context   = 1;
+    aserto.api.v1.IdentityContext  identity_context = 2;
+    DecisionTreeOptions            options          = 3;
+    google.protobuf.Struct         resource_context = 4;
+}
+  
+enum PathSeparator {
+    PATH_SEPARATOR_UNKNOWN                       = 0; // Value not set.
+    PATH_SEPARATOR_DOT                           = 1; // Dot "." path separator
+    PATH_SEPARATOR_SLASH                         = 2; // Slash "/" path separtor
+}
+
+message DecisionTreeOptions {
+    PathSeparator               path_separator   = 1;
+    reserved                                       2; // removed "grouping"        
+}
+  
+message DecisionTreeResponse {
+    string                      path_root        = 1;
+    reserved                                       2; // removed "revision"
+    google.protobuf.Struct      path             = 3;
+}
+
+message IsRequest {
+    aserto.api.v1.PolicyContext   policy_context   = 1;
+    aserto.api.v1.IdentityContext identity_context = 2;
+    google.protobuf.Struct        resource_context = 3;
+}
+  
+message Decision {
+    string                      decision         = 1;
+    bool                        is               = 2;
+}
+  
+message IsResponse {
+    repeated Decision           decisions        = 1;
+}
+
+enum TraceLevel {
+    TRACE_LEVEL_UNKNOWN                          = 0; // Value not set.
+    TRACE_LEVEL_OFF                              = 1; // ExplainOffV1   ExplainModeV1 = "off"
+    TRACE_LEVEL_FULL                             = 2; // ExplainFullV1  ExplainModeV1 = "full"
+    TRACE_LEVEL_NOTES                            = 3; // ExplainNotesV1 ExplainModeV1 = "notes"
+    TRACE_LEVEL_FAILS                            = 4; // ExplainFailsV1 ExplainModeV1 = "fails"
+}
