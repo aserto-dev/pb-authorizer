@@ -10,7 +10,6 @@ import "protoc-gen-openapiv2/options/annotations.proto";
 
 import "google/protobuf/struct.proto";
 
-import "aserto/api/v1/policy_context.proto";
 import "aserto/api/v1/identity_context.proto";
 
 
@@ -148,10 +147,9 @@ service Authorizer {
 }
 
 message DecisionTreeRequest {
-    aserto.api.v1.PolicyContext    policy_context   = 1;
-    aserto.api.v1.IdentityContext  identity_context = 2;
-    DecisionTreeOptions            options          = 3;
-    google.protobuf.Struct         resource_context = 4;
+    aserto.api.v1.IdentityContext  identity_context = 1;
+    DecisionTreeOptions            options          = 2;
+    google.protobuf.Struct         resource_context = 3;
 }
   
 enum PathSeparator {
@@ -172,9 +170,8 @@ message DecisionTreeResponse {
 }
 
 message IsRequest {
-    aserto.api.v1.PolicyContext   policy_context   = 1;
-    aserto.api.v1.IdentityContext identity_context = 2;
-    google.protobuf.Struct        resource_context = 3;
+    aserto.api.v1.IdentityContext identity_context = 1;
+    google.protobuf.Struct        resource_context = 2;
 }
   
 message Decision {
@@ -197,6 +194,8 @@ message QueryRequest {
   string query = 1;
   string input = 2;
   QueryOptions options = 3;
+  optional aserto.api.v1.IdentityContext  identity_context = 4;
+  optional google.protobuf.Struct         resource_context = 5;
 }
 
 message CompileRequest {
@@ -205,6 +204,8 @@ message CompileRequest {
     repeated string unknowns = 3;
     repeated string disable_inlining = 4;
     QueryOptions options = 5;
+    optional aserto.api.v1.IdentityContext  identity_context = 6;
+    optional google.protobuf.Struct         resource_context = 7;
 }
 
 message CompileResponse {
