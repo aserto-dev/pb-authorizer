@@ -11,7 +11,7 @@ import "protoc-gen-openapiv2/options/annotations.proto";
 import "google/protobuf/struct.proto";
 
 import "aserto/api/v1/identity_context.proto";
-import "aserto/api/v2/policy_context.proto";
+import "aserto/authorizer/api/v2/policy_context.proto";
 
 
 // OpenAPI annotations.
@@ -148,10 +148,10 @@ service Authorizer {
 }
 
 message DecisionTreeRequest {
-    aserto.api.v2.PolicyContext    policy_context = 1;
-    aserto.api.v1.IdentityContext  identity_context = 2;
-    DecisionTreeOptions            options          = 3;
-    google.protobuf.Struct         resource_context = 4;
+    aserto.authorizer.api.v2.PolicyContext    policy_context   = 1;
+    aserto.api.v1.IdentityContext             identity_context = 2;
+    DecisionTreeOptions                       options          = 3;
+    google.protobuf.Struct                    resource_context = 4;
 }
   
 enum PathSeparator {
@@ -172,9 +172,9 @@ message DecisionTreeResponse {
 }
 
 message IsRequest {
-    aserto.api.v2.PolicyContext   policy_context = 1;
-    aserto.api.v1.IdentityContext identity_context = 2;
-    google.protobuf.Struct        resource_context = 3;
+    aserto.authorizer.api.v2.PolicyContext   policy_context   = 1;
+    aserto.api.v1.IdentityContext            identity_context = 2;
+    google.protobuf.Struct                   resource_context = 3;
 }
   
 message Decision {
@@ -194,23 +194,23 @@ message QueryOptions {
 }
 
 message QueryRequest {
-  string query = 1;
-  string input = 2;
-  QueryOptions options = 3;
-  optional aserto.api.v2.PolicyContext    policy_context = 4;
-  optional aserto.api.v1.IdentityContext  identity_context = 5;
-  optional google.protobuf.Struct         resource_context = 6;
+  string                                             query = 1;
+  string                                             input = 2;
+  QueryOptions                                       options = 3;
+  optional aserto.authorizer.api.v2.PolicyContext    policy_context = 4;
+  optional aserto.api.v1.IdentityContext             identity_context = 5;
+  optional google.protobuf.Struct                    resource_context = 6;
 }
 
 message CompileRequest {
-    string query = 1;
-    string input = 2;
-    repeated string unknowns = 3;
-    repeated string disable_inlining = 4;
-    QueryOptions options = 5;
-    optional aserto.api.v2.PolicyContext    policy_context = 6;
-    optional aserto.api.v1.IdentityContext  identity_context = 7;
-    optional google.protobuf.Struct         resource_context = 8;
+    string                                             query = 1;
+    string                                             input = 2;
+    repeated string                                    unknowns = 3;
+    repeated string                                    disable_inlining = 4;
+    QueryOptions                                       options = 5;
+    optional aserto.authorizer.api.v2.PolicyContext    policy_context = 6;
+    optional aserto.api.v1.IdentityContext             identity_context = 7;
+    optional google.protobuf.Struct                    resource_context = 8;
 }
 
 message CompileResponse {
