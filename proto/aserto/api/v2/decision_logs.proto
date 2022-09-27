@@ -9,7 +9,7 @@ import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 
 import "aserto/authorizer/api/v2/policy_context.proto";
-import "aserto/api/v1/identity_context.proto";
+import "aserto/authorizer/api/v2/identity_context.proto";
 
 // represents a decision that an authorizer performed in the past
 message Decision {
@@ -25,9 +25,9 @@ message Decision {
 
 // information about a user on behalf of whom a decision was made
 message DecisionUser {    
-    aserto.api.v1.IdentityContext context = 1;    // identity context used in the decision
-    string id                             = 2;    // id of the user the identity resolved to    
-    string email                          = 3;    // convinience human-readable identifier
+    aserto.authorizer.api.v2.IdentityContext context = 1;    // identity context used in the decision
+    string id                                        = 2;    // id of the user the identity resolved to    
+    string email                                     = 3;    // convinience human-readable identifier
 }
 
 // information about a policy used in a decision
