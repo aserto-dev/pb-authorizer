@@ -10,8 +10,8 @@ import "protoc-gen-openapiv2/options/annotations.proto";
 
 import "google/protobuf/struct.proto";
 
-import "aserto/api/v1/policy_context.proto";
-import "aserto/api/v1/identity_context.proto";
+import "aserto/authorizer/api/v2/identity_context.proto";
+import "aserto/authorizer/api/v2/policy_context.proto";
 
 
 // OpenAPI annotations.
@@ -97,13 +97,61 @@ service Authorizer {
             }
         };
     };
+
+    rpc Query (QueryRequest) returns (QueryResponse){
+        option (google.api.http) = {
+            post: "/api/v2/authz/query"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            tags: "authorizer"
+            summary: "Query (authorized)"
+            description: "Executes a rego query on the loaded policy runtime."
+            operation_id: "authorizer.query"
+            deprecated: false
+            security: {
+                security_requirement: {
+					key: "TenantID";
+					value: {}
+				}
+                security_requirement: {
+					key: "AuthorizerAPIKey";
+					value: {}
+				}
+            }
+        };
+    };
+
+    rpc Compile(CompileRequest) returns (CompileResponse) {
+        option (google.api.http) = {
+            post: "/api/v2/authz/compile"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            tags: "authorizer"
+            summary: "Compile (authorized)"
+            description: "Executes a partial query on the loaded policy runtime."
+            operation_id: "authorizer.compile"
+            deprecated: false
+            security: {
+                security_requirement: {
+					key: "TenantID";
+					value: {}
+				}
+                security_requirement: {
+					key: "AuthorizerAPIKey";
+					value: {}
+				}
+            }
+        };
+    };
 }
 
 message DecisionTreeRequest {
-    aserto.api.v1.PolicyContext    policy_context   = 1;
-    aserto.api.v1.IdentityContext  identity_context = 2;
-    DecisionTreeOptions            options          = 3;
-    google.protobuf.Struct         resource_context = 4;
+    aserto.authorizer.api.v2.PolicyContext    policy_context   = 1;
+    aserto.authorizer.api.v2.IdentityContext  identity_context = 2;
+    DecisionTreeOptions                       options          = 3;
+    google.protobuf.Struct                    resource_context = 4;
 }
   
 enum PathSeparator {
@@ -124,9 +172,9 @@ message DecisionTreeResponse {
 }
 
 message IsRequest {
-    aserto.api.v1.PolicyContext   policy_context   = 1;
-    aserto.api.v1.IdentityContext identity_context = 2;
-    google.protobuf.Struct        resource_context = 3;
+    aserto.authorizer.api.v2.PolicyContext   policy_context   = 1;
+    aserto.authorizer.api.v2.IdentityContext identity_context = 2;
+    google.protobuf.Struct                   resource_context = 3;
 }
   
 message Decision {
@@ -136,6 +184,47 @@ message Decision {
   
 message IsResponse {
     repeated Decision           decisions        = 1;
+}
+
+message QueryOptions {
+    bool                        metrics          = 1; // default false
+    bool                        instrument       = 2; // default false
+    TraceLevel                  trace            = 3; // default ExplainOffV1
+    bool                        trace_summary    = 4; // default false
+}
+
+message QueryRequest {
+  string                                             query = 1;
+  string                                             input = 2;
+  optional QueryOptions                              options = 3;
+  optional aserto.authorizer.api.v2.PolicyContext    policy_context = 4;
+  optional aserto.authorizer.api.v2.IdentityContext   identity_context = 5;
+  optional google.protobuf.Struct                    resource_context = 6;
+}
+
+message CompileRequest {
+    string                                             query = 1;
+    string                                             input = 2;
+    repeated string                                    unknowns = 3;
+    repeated string                                    disable_inlining = 4;
+    optional QueryOptions                              options = 5;
+    optional aserto.authorizer.api.v2.PolicyContext    policy_context = 6;
+    optional aserto.authorizer.api.v2.IdentityContext  identity_context = 7;
+    optional google.protobuf.Struct                    resource_context = 8;
+}
+
+message CompileResponse {
+    google.protobuf.Struct          response = 1;
+    google.protobuf.Struct          metrics      = 2;
+    repeated google.protobuf.Struct trace        = 3;
+    repeated string                 trace_summary= 4;
+}
+
+message QueryResponse {
+    google.protobuf.Struct          response = 1;
+    google.protobuf.Struct          metrics      = 2;
+    repeated google.protobuf.Struct trace        = 3;
+    repeated string                 trace_summary= 4;
 }
 
 enum TraceLevel {
