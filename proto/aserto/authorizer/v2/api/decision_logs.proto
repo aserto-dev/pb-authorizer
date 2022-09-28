@@ -1,15 +1,15 @@
 syntax = "proto3";
 
-option go_package = "github.com/aserto-dev/go-authorizer/aserto/api/v2;api"; 
-option csharp_namespace = "Aserto.API.V2";
+option go_package = "github.com/aserto-dev/go-authorizer/aserto/authorizer/v2/api;api"; 
+option csharp_namespace = "Aserto.Authorizer.V2.API";
 
-package aserto.api.v2;
+package aserto.authorizer.v2.api;
 
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 
-import "aserto/authorizer/api/v2/policy_context.proto";
-import "aserto/authorizer/api/v2/identity_context.proto";
+import "aserto/authorizer/v2/api/policy_context.proto";
+import "aserto/authorizer/v2/api/identity_context.proto";
 
 // represents a decision that an authorizer performed in the past
 message Decision {
@@ -25,14 +25,14 @@ message Decision {
 
 // information about a user on behalf of whom a decision was made
 message DecisionUser {    
-    aserto.authorizer.api.v2.IdentityContext context = 1;    // identity context used in the decision
+    aserto.authorizer.v2.api.IdentityContext context = 1;    // identity context used in the decision
     string id                                        = 2;    // id of the user the identity resolved to    
     string email                                     = 3;    // convinience human-readable identifier
 }
 
 // information about a policy used in a decision
 message DecisionPolicy {
-    aserto.authorizer.api.v2.PolicyContext context          = 1;    // policy context used in the decision
+    aserto.authorizer.v2.api.PolicyContext context          = 1;    // policy context used in the decision
     string                                 registry_service = 2;    // registry service where policy was retrieved from (e.g. opcr.io)
     string                                 registry_image   = 3;    // image of the policy in the registry, including org (e.g. acmecorp/peoplefinder-abac)
     string                                 registry_tag     = 4;    // tag of the policy image (e.g. 0.8.2 or latest)
