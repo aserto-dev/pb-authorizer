@@ -186,7 +186,7 @@ message CompileRequest {
 }
 
 message CompileResponse {
-    google.protobuf.Struct          response     = 1;
+    google.protobuf.Struct          result       = 1;
     google.protobuf.Struct          metrics      = 2;
     repeated google.protobuf.Struct trace        = 3;
     repeated string                 trace_summary= 4;
