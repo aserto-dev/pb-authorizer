@@ -21,14 +21,6 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
     produces: "application/json";
     security_definitions: {
         security: {
-            key: "TenantID"
-            value: {
-                type: TYPE_API_KEY;
-                in: IN_HEADER;
-                name: "aserto-tenant-id";
-            }
-        }
-        security: {
             key: "AuthorizerAPIKey"
             value: {
                 type: TYPE_API_KEY;
@@ -40,10 +32,6 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
     security: {
 		security_requirement: {
 			key: "AuthorizerAPIKey";
-			value: {};
-		}
-		security_requirement: {
-			key: "TenantID";
 			value: {};
 		}
 	}
@@ -62,10 +50,6 @@ service Authorizer {
             operation_id: "authorizer.decision_tree"
             deprecated: false
             security: {
-                security_requirement: {
-					key: "TenantID";
-					value: {}
-				}
                 security_requirement: {
 					key: "AuthorizerAPIKey";
 					value: {}
@@ -87,10 +71,6 @@ service Authorizer {
             deprecated: false
             security: {
                 security_requirement: {
-					key: "TenantID";
-					value: {}
-				}
-                security_requirement: {
 					key: "AuthorizerAPIKey";
 					value: {}
 				}
@@ -111,10 +91,6 @@ service Authorizer {
             deprecated: false
             security: {
                 security_requirement: {
-					key: "TenantID";
-					value: {}
-				}
-                security_requirement: {
 					key: "AuthorizerAPIKey";
 					value: {}
 				}
@@ -134,10 +110,6 @@ service Authorizer {
             operation_id: "authorizer.compile"
             deprecated: false
             security: {
-                security_requirement: {
-					key: "TenantID";
-					value: {}
-				}
                 security_requirement: {
 					key: "AuthorizerAPIKey";
 					value: {}
@@ -194,34 +166,34 @@ message QueryOptions {
 }
 
 message QueryRequest {
-  string                                             query = 1;
-  string                                             input = 2;
-  optional QueryOptions                              options = 3;
-  optional aserto.authorizer.v2.api.PolicyContext    policy_context = 4;
+  string                                             query            = 1;
+  string                                             input            = 2;
+  optional QueryOptions                              options          = 3;
+  optional aserto.authorizer.v2.api.PolicyContext    policy_context   = 4;
   optional aserto.authorizer.v2.api.IdentityContext  identity_context = 5;
   optional google.protobuf.Struct                    resource_context = 6;
 }
 
 message CompileRequest {
-    string                                             query = 1;
-    string                                             input = 2;
-    repeated string                                    unknowns = 3;
+    string                                             query            = 1;
+    string                                             input            = 2;
+    repeated string                                    unknowns         = 3;
     repeated string                                    disable_inlining = 4;
-    optional QueryOptions                              options = 5;
-    optional aserto.authorizer.v2.api.PolicyContext    policy_context = 6;
+    optional QueryOptions                              options          = 5;
+    optional aserto.authorizer.v2.api.PolicyContext    policy_context   = 6;
     optional aserto.authorizer.v2.api.IdentityContext  identity_context = 7;
     optional google.protobuf.Struct                    resource_context = 8;
 }
 
 message CompileResponse {
-    google.protobuf.Struct          response = 1;
+    google.protobuf.Struct          result       = 1;
     google.protobuf.Struct          metrics      = 2;
     repeated google.protobuf.Struct trace        = 3;
     repeated string                 trace_summary= 4;
 }
 
 message QueryResponse {
-    google.protobuf.Struct          response = 1;
+    google.protobuf.Struct          response     = 1;
     google.protobuf.Struct          metrics      = 2;
     repeated google.protobuf.Struct trace        = 3;
     repeated string                 trace_summary= 4;
