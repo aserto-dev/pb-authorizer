@@ -140,7 +140,7 @@ service Authorizer {
 
     rpc GetPolicy(GetPolicyRequest) returns (GetPolicyResponse) {
         option (google.api.http) = {
-            get: "/api/v2/policies/{id}"
+            get: "/api/v2/policies/{id=*/**}"
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             tags: "authorizer"

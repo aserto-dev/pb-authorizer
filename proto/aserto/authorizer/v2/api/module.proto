@@ -10,6 +10,6 @@ package aserto.authorizer.v2.api;
 message Module {
     string id                  = 1;                              
     string raw                 = 2;
-    google.protobuf.Struct ast = 3;
+    string package_path        = 3;
+    google.protobuf.Value ast  = 4;
   }
-  
