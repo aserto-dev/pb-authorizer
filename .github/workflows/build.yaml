@@ -89,6 +89,8 @@ jobs:
       matrix:
         cfg:
           - { project: go-authorizer }
+          - { project: ruby-authorizer }
+          - { project: dotnet-authorizer }
 
     name: Generate on ${{ matrix.cfg.project }}
     steps:
