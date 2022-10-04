@@ -8,8 +8,8 @@ import "google/protobuf/struct.proto";
 package aserto.authorizer.v2.api;
 
 message Module {
-    string id                  = 1;                              
-    string raw                 = 2;
-    string package_path        = 3;
-    google.protobuf.Value ast  = 4;
+    optional string id                 = 1;
+    optional string raw                = 2;
+    optional string package_path       = 3;
+    optional google.protobuf.Value ast = 4;
   }

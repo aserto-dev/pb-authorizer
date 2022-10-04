@@ -9,6 +9,7 @@ import "google/api/annotations.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 import "google/protobuf/struct.proto";
+import "google/protobuf/field_mask.proto";
 
 import "aserto/authorizer/v2/api/identity_context.proto";
 import "aserto/authorizer/v2/api/policy_context.proto";
@@ -160,13 +161,16 @@ service Authorizer {
 
 message GetPolicyRequest{
     string id = 1;
+    google.protobuf.FieldMask field_mask = 2;
 }
 
 message GetPolicyResponse{
     aserto.authorizer.v2.api.Module result = 1;
 }
 
-message ListPoliciesRequest {}
+message ListPoliciesRequest {
+    google.protobuf.FieldMask field_mask = 1;
+}
 
 message ListPoliciesResponse {
     repeated aserto.authorizer.v2.api.Module result = 1;
