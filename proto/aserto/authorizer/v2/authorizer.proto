@@ -9,9 +9,11 @@ import "google/api/annotations.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 import "google/protobuf/struct.proto";
+import "google/protobuf/field_mask.proto";
 
 import "aserto/authorizer/v2/api/identity_context.proto";
 import "aserto/authorizer/v2/api/policy_context.proto";
+import "aserto/authorizer/v2/api/module.proto";
 
 
 // OpenAPI annotations.
@@ -117,6 +119,61 @@ service Authorizer {
             }
         };
     };
+
+    rpc ListPolicies(ListPoliciesRequest) returns (ListPoliciesResponse) {
+        option (google.api.http) = {
+            get: "/api/v2/policies"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            tags: "authorizer"
+            summary: "List Policies"
+            description: "Lists the policy modules for the policy bundle."
+            operation_id: "policies.list"
+            deprecated: false
+            security: {
+                security_requirement: {
+					key: "AuthorizerAPIKey";
+					value: {}
+				}
+            }
+        };
+    };
+
+    rpc GetPolicy(GetPolicyRequest) returns (GetPolicyResponse) {
+        option (google.api.http) = {
+            get: "/api/v2/policies/{id=*/**}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            tags: "authorizer"
+            summary: "Get Policy"
+            description: "Gets the policy modules for the given module Id."
+            operation_id: "policies.get"
+            deprecated: false
+            security: {
+                security_requirement: {
+					key: "AuthorizerAPIKey";
+					value: {}
+				}
+            }
+        };
+    };
+}
+
+message GetPolicyRequest{
+    string id = 1;
+    google.protobuf.FieldMask field_mask = 2;
+}
+
+message GetPolicyResponse{
+    aserto.authorizer.v2.api.Module result = 1;
+}
+
+message ListPoliciesRequest {
+    google.protobuf.FieldMask field_mask = 1;
+}
+
+message ListPoliciesResponse {
+    repeated aserto.authorizer.v2.api.Module result = 1;
 }
 
 message DecisionTreeRequest {
