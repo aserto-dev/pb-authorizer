@@ -157,6 +157,32 @@ service Authorizer {
             }
         };
     };
+
+    rpc Info(InfoRequest) returns (InfoResponse) {
+        option (google.api.http) = {
+            get: "/api/v2/info"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            tags: "Info"
+            summary: "Info"
+            description: "Return version information."
+            operation_id: "info.get"
+            deprecated: false
+            security: {
+            }
+        };
+    };
+}
+
+message InfoRequest {
+}
+
+message InfoResponse {
+    string version = 1;
+    string commit = 2;
+    string date = 3;
+    string os = 4;
+    string arch = 5;
 }
 
 message GetPolicyRequest{
