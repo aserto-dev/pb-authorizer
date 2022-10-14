@@ -46,7 +46,7 @@ service Authorizer {
             body: "*"
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-            tags: "authorizer"
+            tags: "Authorizer"
             summary: "Decision tree"
             description: "Returns decision tree for given identity context."
             operation_id: "authorizer.decision_tree"
@@ -66,7 +66,7 @@ service Authorizer {
             body: "*"
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-            tags: "authorizer"
+            tags: "Authorizer"
             summary: "Is (authorized)"
             description: "Determines if identity context is authorized to access the resource guarded by the given policy."
             operation_id: "authorizer.is"
@@ -86,7 +86,7 @@ service Authorizer {
             body: "*"
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-            tags: "authorizer"
+            tags: "Authorizer"
             summary: "Query (authorized)"
             description: "Executes a rego query on the loaded policy runtime."
             operation_id: "authorizer.query"
@@ -106,7 +106,7 @@ service Authorizer {
             body: "*"
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-            tags: "authorizer"
+            tags: "Authorizer"
             summary: "Compile (authorized)"
             description: "Executes a partial query on the loaded policy runtime."
             operation_id: "authorizer.compile"
@@ -125,7 +125,7 @@ service Authorizer {
             get: "/api/v2/policies"
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-            tags: "authorizer"
+            tags: "Policy"
             summary: "List Policies"
             description: "Lists the policy modules for the policy bundle."
             operation_id: "policies.list"
@@ -144,7 +144,7 @@ service Authorizer {
             get: "/api/v2/policies/{id=*/**}"
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-            tags: "authorizer"
+            tags: "Policy"
             summary: "Get Policy"
             description: "Gets the policy modules for the given module Id."
             operation_id: "policies.get"
