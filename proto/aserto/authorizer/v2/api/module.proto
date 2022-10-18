@@ -12,4 +12,5 @@ message Module {
     optional string raw                = 2;
     optional string package_path       = 3;
     optional google.protobuf.Value ast = 4;
+    optional string package_root       = 5;
   }
