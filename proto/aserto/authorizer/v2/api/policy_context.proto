@@ -6,6 +6,9 @@ option csharp_namespace = "Aserto.Authorizer.V2.API";
 package aserto.authorizer.v2.api;
 
 message PolicyContext {
-  string path               = 1;                              // policy path aka package name
-  repeated string decisions = 2;                              // list (1..N) of policy decisions (aka rules)
+  optional string name           = 1;                              // policy name
+  optional string instance_label = 2;                              // label identifying the instance of the policy
+
+  string path                    = 3;                              // policy path aka package name
+  repeated string decisions      = 4;                              // list (1..N) of policy decisions (aka rules)
 }
