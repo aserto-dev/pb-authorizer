@@ -14,7 +14,7 @@ import "google/protobuf/field_mask.proto";
 import "aserto/authorizer/v2/api/identity_context.proto";
 import "aserto/authorizer/v2/api/policy_context.proto";
 import "aserto/authorizer/v2/api/module.proto";
-
+import "aserto/authorizer/v2/api/policy_instance.proto";
 
 // OpenAPI annotations.
 option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
@@ -186,8 +186,9 @@ message InfoResponse {
 }
 
 message GetPolicyRequest{
-    string id = 1;
-    google.protobuf.FieldMask field_mask = 2;
+    string                                             id              = 1;
+    google.protobuf.FieldMask                          field_mask      = 2;
+    optional aserto.authorizer.v2.api.PolicyInstance   policy_instance = 3;
 }
 
 message GetPolicyResponse{
@@ -195,7 +196,8 @@ message GetPolicyResponse{
 }
 
 message ListPoliciesRequest {
-    google.protobuf.FieldMask field_mask = 1;
+    google.protobuf.FieldMask                          field_mask      = 1;
+    optional aserto.authorizer.v2.api.PolicyInstance   policy_instance = 2;
 }
 
 message ListPoliciesResponse {
@@ -203,10 +205,11 @@ message ListPoliciesResponse {
 }
 
 message DecisionTreeRequest {
-    aserto.authorizer.v2.api.PolicyContext    policy_context   = 1;
-    aserto.authorizer.v2.api.IdentityContext  identity_context = 2;
-    DecisionTreeOptions                       options          = 3;
-    google.protobuf.Struct                    resource_context = 4;
+    aserto.authorizer.v2.api.PolicyContext             policy_context   = 1;
+    aserto.authorizer.v2.api.IdentityContext           identity_context = 2;
+    DecisionTreeOptions                                options          = 3;
+    google.protobuf.Struct                             resource_context = 4;
+    optional aserto.authorizer.v2.api.PolicyInstance   policy_instance  = 5;
 }
   
 enum PathSeparator {
@@ -227,9 +230,10 @@ message DecisionTreeResponse {
 }
 
 message IsRequest {
-    aserto.authorizer.v2.api.PolicyContext   policy_context   = 1;
-    aserto.authorizer.v2.api.IdentityContext identity_context = 2;
-    google.protobuf.Struct                   resource_context = 3;
+    aserto.authorizer.v2.api.PolicyContext             policy_context   = 1;
+    aserto.authorizer.v2.api.IdentityContext           identity_context = 2;
+    google.protobuf.Struct                             resource_context = 3; 
+    optional aserto.authorizer.v2.api.PolicyInstance   policy_instance  = 4;
 }
   
 message Decision {
@@ -255,6 +259,7 @@ message QueryRequest {
   optional aserto.authorizer.v2.api.PolicyContext    policy_context   = 4;
   optional aserto.authorizer.v2.api.IdentityContext  identity_context = 5;
   optional google.protobuf.Struct                    resource_context = 6;
+  optional aserto.authorizer.v2.api.PolicyInstance   policy_instance  = 7;
 }
 
 message CompileRequest {
@@ -266,6 +271,7 @@ message CompileRequest {
     optional aserto.authorizer.v2.api.PolicyContext    policy_context   = 6;
     optional aserto.authorizer.v2.api.IdentityContext  identity_context = 7;
     optional google.protobuf.Struct                    resource_context = 8;
+    optional aserto.authorizer.v2.api.PolicyInstance   policy_instance  = 9;
 }
 
 message CompileResponse {
