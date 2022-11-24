@@ -22,6 +22,7 @@ message Decision {
     map<string, bool> outcomes          = 6;    // outcome of the decisions specified in the policy context
     google.protobuf.Struct resource     = 7;    // the resource context used in a decision
     map<string, string> annotations     = 8;    // annotations that may be added to a decision    
+    optional string tenant_id           = 9;    // id of the tenant that generated the decision
 }
 
 // information about a user on behalf of whom a decision was made
