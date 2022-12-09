@@ -10,6 +10,7 @@ import "google/protobuf/timestamp.proto";
 
 import "aserto/authorizer/v2/api/policy_context.proto";
 import "aserto/authorizer/v2/api/identity_context.proto";
+import "aserto/authorizer/v2/api/policy_instance.proto";
 
 // represents a decision that an authorizer performed in the past
 message Decision {
@@ -21,6 +22,7 @@ message Decision {
     map<string, bool> outcomes          = 6;    // outcome of the decisions specified in the policy context
     google.protobuf.Struct resource     = 7;    // the resource context used in a decision
     map<string, string> annotations     = 8;    // annotations that may be added to a decision    
+    optional string tenant_id           = 9;    // id of the tenant that generated the decision
 }
 
 // information about a user on behalf of whom a decision was made
@@ -32,9 +34,10 @@ message DecisionUser {
 
 // information about a policy used in a decision
 message DecisionPolicy {
-    aserto.authorizer.v2.api.PolicyContext context          = 1;    // policy context used in the decision
-    string                                 registry_service = 2;    // registry service where policy was retrieved from (e.g. opcr.io)
-    string                                 registry_image   = 3;    // image of the policy in the registry, including org (e.g. acmecorp/peoplefinder-abac)
-    string                                 registry_tag     = 4;    // tag of the policy image (e.g. 0.8.2 or latest)
-    string                                 registry_digest  = 5;    // digest of the policy image 
+    aserto.authorizer.v2.api.PolicyContext  context          = 1;    // policy context used in the decision
+    string                                  registry_service = 2;    // registry service where policy was retrieved from (e.g. opcr.io)
+    string                                  registry_image   = 3;    // image of the policy in the registry, including org (e.g. acmecorp/peoplefinder-abac)
+    string                                  registry_tag     = 4;    // tag of the policy image (e.g. 0.8.2 or latest)
+    string                                  registry_digest  = 5;    // digest of the policy image 
+    aserto.authorizer.v2.api.PolicyInstance policy_instance  = 6;    // policy instance used in decision
 }
