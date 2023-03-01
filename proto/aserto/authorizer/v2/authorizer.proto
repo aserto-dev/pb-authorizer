@@ -36,6 +36,10 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
 			key: "AuthorizerAPIKey";
 			value: {};
 		}
+        security_requirement: {
+			key: "TenantID";
+			value: {};
+		}
 	}
 };
 
@@ -54,6 +58,10 @@ service Authorizer {
             security: {
                 security_requirement: {
 					key: "AuthorizerAPIKey";
+					value: {}
+				}
+                security_requirement: {
+					key: "TenantID";
 					value: {}
 				}
             }
@@ -76,6 +84,10 @@ service Authorizer {
 					key: "AuthorizerAPIKey";
 					value: {}
 				}
+                security_requirement: {
+					key: "TenantID";
+					value: {}
+				}
             }
         };
     };
@@ -94,6 +106,10 @@ service Authorizer {
             security: {
                 security_requirement: {
 					key: "AuthorizerAPIKey";
+					value: {}
+				}
+                security_requirement: {
+					key: "TenantID";
 					value: {}
 				}
             }
@@ -116,6 +132,10 @@ service Authorizer {
 					key: "AuthorizerAPIKey";
 					value: {}
 				}
+                security_requirement: {
+					key: "TenantID";
+					value: {}
+				}
             }
         };
     };
@@ -135,6 +155,10 @@ service Authorizer {
 					key: "AuthorizerAPIKey";
 					value: {}
 				}
+                security_requirement: {
+					key: "TenantID";
+					value: {}
+				}
             }
         };
     };
@@ -152,6 +176,10 @@ service Authorizer {
             security: {
                 security_requirement: {
 					key: "AuthorizerAPIKey";
+					value: {}
+				}
+                security_requirement: {
+					key: "TenantID";
 					value: {}
 				}
             }
