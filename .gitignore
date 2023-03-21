@@ -2,3 +2,6 @@
 .ext/
 
 bin/
+
+# IDE specific
+.idea
