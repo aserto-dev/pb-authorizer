@@ -20,6 +20,6 @@ enum IdentityType {
   IDENTITY_TYPE_SUB         = 2;
   // JWT, identity field contains a JWT access token.
   IDENTITY_TYPE_JWT         = 3;
-  // Manual, will only propagate the identity context infortmation as-is
+  // Manual, will only propagate the identity context information as-is
   IDENTITY_TYPE_MANUAL      = 4;
 }
