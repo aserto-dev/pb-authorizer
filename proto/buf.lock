@@ -4,12 +4,15 @@ deps:
   - remote: buf.build
     owner: aserto-dev
     repository: aserto
-    commit: 6552f18919054b169d8034d05b41e465
+    commit: 946da224ea81449493723a3a29114d16
+    digest: shake256:1847233c40adc132c29cb391a9d2a5547928b1bff129e76e2e33ce818d324101b260c8905eaa7e9033bb7ce6b7c72d33d4cbef4c63cade38df0b2eb9fba2ea6d
   - remote: buf.build
     owner: googleapis
     repository: googleapis
-    commit: 5abafbf55b5c4c07ad5fb06d2599560f
+    commit: 28151c0d0a1641bf938a7672c500e01d
+    digest: shake256:49215edf8ef57f7863004539deff8834cfb2195113f0b890dd1f67815d9353e28e668019165b9d872395871eeafcbab3ccfdb2b5f11734d3cca95be9e8d139de
   - remote: buf.build
     owner: grpc-ecosystem
     repository: grpc-gateway
-    commit: b98ae2f8ce63452e97e6bae65c5add1b
+    commit: 048ae6ff94ca4476b3225904b1078fad
+    digest: shake256:e5250bf2d999516c02206d757502b902e406f35c099d0e869dc3e4f923f6870fe0805a9974c27df0695462937eae90cd4d9db90bb9a03489412560baa74a87b6
