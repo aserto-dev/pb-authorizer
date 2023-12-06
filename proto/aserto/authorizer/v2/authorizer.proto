@@ -107,7 +107,7 @@ service Authorizer {
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             tags: "Authorizer"
-            summary: "Query (authorized)"
+            summary: "Query"
             description: "Executes a rego query on the loaded policy runtime."
             operation_id: "authorizer.query"
             deprecated: false
@@ -131,7 +131,7 @@ service Authorizer {
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             tags: "Authorizer"
-            summary: "Compile (authorized)"
+            summary: "Compile"
             description: "Executes a partial query on the loaded policy runtime."
             operation_id: "authorizer.compile"
             deprecated: false
