@@ -82,6 +82,7 @@ jobs:
       matrix:
         cfg:
           - { project: go-authorizer }
+          - { project: node-authorizer }
           - { project: ruby-authorizer }
           - { project: dotnet-authorizer }
           - { project: python-authorizer }

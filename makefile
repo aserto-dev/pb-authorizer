@@ -15,12 +15,13 @@ SVU_VERSION 	:= 1.12.0
 WIRE_VERSION	:= 0.6.0
 BUF_VERSION 	:= 1.30.0
 
+PROJECT         := authorizer
 BUF_USER		:= $(shell vault kv get -field ASERTO_BUF_USER kv/buf.build)
 BUF_TOKEN		:= $(shell vault kv get -field ASERTO_BUF_TOKEN kv/buf.build)
-BUF_REPO		:= "buf.build/aserto-dev/authorizer"
+BUF_REPO		:= "buf.build/aserto-dev/${PROJECT}"
 BUF_LATEST		:= $(shell BUF_BETA_SUPPRESS_WARNINGS=1 buf beta registry tag list ${BUF_REPO} --format json --reverse | jq -r '.results[0].name')
-BUF_DEV_IMAGE	:= "authorizer.bin"
-PROTO_REPO      := "pb-authorizer"
+BUF_DEV_IMAGE	:= "${PROJECT}.bin"
+PROTO_REPO      := "pb-${PROJECT}"
 
 GIT_ORG         := "https://github.com/aserto-dev"
 
@@ -68,32 +69,33 @@ buf-push:
 .PHONY: buf-mod-update
 buf-mod-update:
 	@echo -e "$(ATTN_COLOR)==> $@ $(NO_COLOR)"
-	@${EXT_BIN_DIR}/buf mod update .
+	@${EXT_BIN_DIR}/buf mod update proto
 
 .PHONY: buf-generate
 buf-generate:
 	@echo -e "$(ATTN_COLOR)==> $@ $(NO_COLOR)"
-	@${EXT_BIN_DIR}/buf mod update .
 	@${EXT_BIN_DIR}/buf generate ${BUF_REPO}:${BUF_LATEST}
 
 .PHONY: buf-generate-dev
 buf-generate-dev:
 	@echo -e "$(ATTN_COLOR)==> $@ $(NO_COLOR)"
-	@${EXT_BIN_DIR}/buf mod update .
 	@${EXT_BIN_DIR}/buf generate "../${PROTO_REPO}/${BUF_DEV_IMAGE}"
 
 .PHONY: info
 info:
 	@echo -e "$(ATTN_COLOR)==> $@ $(NO_COLOR)"
-	@echo "GOOS:        ${GOOS}"
-	@echo "GOARCH:      ${GOARCH}"
-	@echo "BIN_DIR:     ${BIN_DIR}"
-	@echo "EXT_DIR:     ${EXT_DIR}"
-	@echo "EXT_BIN_DIR: ${EXT_BIN_DIR}"
-	@echo "EXT_TMP_DIR: ${EXT_TMP_DIR}"
-	@echo "RELEASE_TAG: ${RELEASE_TAG}"
-	@echo "BUF_REPO:    ${BUF_REPO}"
-	@echo "BUF_LATEST:  ${BUF_LATEST}"
+	@echo "PROJECT:       ${PROJECT}"
+	@echo "GOOS:          ${GOOS}"
+	@echo "GOARCH:        ${GOARCH}"
+	@echo "BIN_DIR:       ${BIN_DIR}"
+	@echo "EXT_DIR:       ${EXT_DIR}"
+	@echo "EXT_BIN_DIR:   ${EXT_BIN_DIR}"
+	@echo "EXT_TMP_DIR:   ${EXT_TMP_DIR}"
+	@echo "RELEASE_TAG:   ${RELEASE_TAG}"
+	@echo "BUF_REPO:      ${BUF_REPO}"
+	@echo "BUF_LATEST:    ${BUF_LATEST}"
+	@echo "BUF_DEV_IMAGE: ${BUF_DEV_IMAGE}"
+	@echo "PROTO_REPO:    ${PROTO_REPO}"
 
 .PHONY: install-vault
 install-vault: ${EXT_BIN_DIR} ${EXT_TMP_DIR}
