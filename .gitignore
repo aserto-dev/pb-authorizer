@@ -1,5 +1,6 @@
 .dev/
 .ext/
+
 bin/
 
 # https://github.com/golang/go/issues/53502
