@@ -1,8 +1,16 @@
 {
-    "cSpell.words": [
-        "Aserto"
+    "cSpell.enabled": true,
+    "cSpell.enableFiletypes": [
+        "proto3"
     ],
-    "gopls": {
-        "build.buildFlags": ["-tags=wireinject,mage"],
-      }
+    "cSpell.words": [
+        "aserto",
+        "etag",
+        "oneof",
+        "openAPIv2",
+        "proto",
+        "protobuf",
+        "protoc",
+        "struct"
+    ]
 }
