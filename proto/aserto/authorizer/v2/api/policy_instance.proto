@@ -6,6 +6,8 @@ option csharp_namespace = "Aserto.Authorizer.V2.API";
 package aserto.authorizer.v2.api;
 
 message PolicyInstance {
-  string name               = 1;                              // policy name
-  string instance_label     = 2;                              // label identifying the instance of the policy
+  // policy name
+  string name              = 1;
+  // label identifying the instance of the policy
+  string instance_label    = 2 [deprecated = true];
 }
