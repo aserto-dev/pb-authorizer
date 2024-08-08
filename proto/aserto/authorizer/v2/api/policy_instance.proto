@@ -7,7 +7,7 @@ package aserto.authorizer.v2.api;
 
 message PolicyInstance {
   // policy name
-  string name                       = 1;
+  string name              = 1;
   // label identifying the instance of the policy
   string instance_label    = 2 [deprecated = true];
 }
