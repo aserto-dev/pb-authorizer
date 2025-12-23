@@ -1,13 +1,13 @@
 syntax = "proto3";
 
-option go_package = "github.com/aserto-dev/go-authorizer/aserto/authorizer/v2/api;api"; 
-option csharp_namespace = "Aserto.Authorizer.V2.API";
-
 package aserto.authorizer.v2.api;
+
+option csharp_namespace = "Aserto.Authorizer.V2.API";
+option go_package = "github.com/aserto-dev/go-authorizer/aserto/authorizer/v2/api;api";
 
 message PolicyInstance {
   // policy name
-  string name              = 1;
+  string name = 1;
   // label identifying the instance of the policy
-  string instance_label    = 2 [deprecated = true];
+  string instance_label = 2 [deprecated = true];
 }
