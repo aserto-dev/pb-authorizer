@@ -209,21 +209,6 @@
         
           
           <li>
-            <a href="#aserto%2fauthorizer%2fv2%2fapi%2fpolicy_instance.proto">aserto/authorizer/v2/api/policy_instance.proto</a>
-            <ul>
-              
-                <li>
-                  <a href="#aserto.authorizer.v2.api.PolicyInstance"><span class="badge">M</span>PolicyInstance</a>
-                </li>
-              
-              
-              
-              
-            </ul>
-          </li>
-        
-          
-          <li>
             <a href="#aserto%2fauthorizer%2fv2%2fapi%2fdecision_logs.proto">aserto/authorizer/v2/api/decision_logs.proto</a>
             <ul>
               
@@ -497,72 +482,6 @@
     
       
       <div class="file-heading">
-        <h2 id="aserto/authorizer/v2/api/policy_instance.proto">aserto/authorizer/v2/api/policy_instance.proto</h2><a href="#title">Top</a>
-      </div>
-      <p></p>
-
-      
-        <h3 id="aserto.authorizer.v2.api.PolicyInstance">PolicyInstance</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>name</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>policy name </p></td>
-                </tr>
-              
-                <tr>
-                  <td>instance_label</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p><strong>Deprecated.</strong> label identifying the instance of the policy </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-            
-            
-            <h4>Fields with deprecated option</h4>
-            <table>
-              <thead>
-                <tr>
-                  <td>Name</td>
-                  <td>Option</td>
-                </tr>
-              </thead>
-              <tbody>
-              
-                <tr>
-                  <td>instance_label</td>
-                  <td><p>true</p></td>
-                </tr>
-              
-              </tbody>
-            </table>
-            
-          
-
-        
-      
-
-      
-
-      
-
-      
-    
-      
-      <div class="file-heading">
         <h2 id="aserto/authorizer/v2/api/decision_logs.proto">aserto/authorizer/v2/api/decision_logs.proto</h2><a href="#title">Top</a>
       </div>
       <p></p>
@@ -632,13 +551,6 @@
                   <td><a href="#aserto.authorizer.v2.api.Decision.AnnotationsEntry">Decision.AnnotationsEntry</a></td>
                   <td>repeated</td>
                   <td><p>annotations that may be added to a decision </p></td>
-                </tr>
-              
-                <tr>
-                  <td>tenant_id</td>
-                  <td><a href="#string">string</a></td>
-                  <td>optional</td>
-                  <td><p>id of the tenant that generated the decision </p></td>
                 </tr>
               
             </tbody>
@@ -755,13 +667,6 @@
                   <td><p>digest of the policy image </p></td>
                 </tr>
               
-                <tr>
-                  <td>policy_instance</td>
-                  <td><a href="#aserto.authorizer.v2.api.PolicyInstance">PolicyInstance</a></td>
-                  <td></td>
-                  <td><p>policy instance used in decision </p></td>
-                </tr>
-              
             </tbody>
           </table>
 
@@ -797,7 +702,7 @@
                   <td>email</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>convinience human-readable identifier </p></td>
+                  <td><p>convenience human-readable identifier </p></td>
                 </tr>
               
             </tbody>
@@ -953,13 +858,6 @@
                   <td><p> </p></td>
                 </tr>
               
-                <tr>
-                  <td>policy_instance</td>
-                  <td><a href="#aserto.authorizer.v2.api.PolicyInstance">api.PolicyInstance</a></td>
-                  <td>optional</td>
-                  <td><p> </p></td>
-                </tr>
-              
             </tbody>
           </table>
 
@@ -1105,13 +1003,6 @@
                   <td><p> </p></td>
                 </tr>
               
-                <tr>
-                  <td>policy_instance</td>
-                  <td><a href="#aserto.authorizer.v2.api.PolicyInstance">api.PolicyInstance</a></td>
-                  <td>optional</td>
-                  <td><p> </p></td>
-                </tr>
-              
             </tbody>
           </table>
 
@@ -1171,13 +1062,6 @@
                   <td>field_mask</td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>policy_instance</td>
-                  <td><a href="#aserto.authorizer.v2.api.PolicyInstance">api.PolicyInstance</a></td>
-                  <td>optional</td>
                   <td><p> </p></td>
                 </tr>
               
@@ -1302,13 +1186,6 @@
                   <td><p> </p></td>
                 </tr>
               
-                <tr>
-                  <td>policy_instance</td>
-                  <td><a href="#aserto.authorizer.v2.api.PolicyInstance">api.PolicyInstance</a></td>
-                  <td>optional</td>
-                  <td><p> </p></td>
-                </tr>
-              
             </tbody>
           </table>
 
@@ -1354,13 +1231,6 @@
                   <td>field_mask</td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>policy_instance</td>
-                  <td><a href="#aserto.authorizer.v2.api.PolicyInstance">api.PolicyInstance</a></td>
-                  <td>optional</td>
                   <td><p> </p></td>
                 </tr>
               
@@ -1488,13 +1358,6 @@
                 <tr>
                   <td>resource_context</td>
                   <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
-                  <td>optional</td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>policy_instance</td>
-                  <td><a href="#aserto.authorizer.v2.api.PolicyInstance">api.PolicyInstance</a></td>
                   <td>optional</td>
                   <td><p> </p></td>
                 </tr>

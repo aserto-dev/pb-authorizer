@@ -51,7 +51,6 @@ jobs:
           - { project: dotnet-authorizer }
           - { project: ruby-authorizer }
           - { project: python-authorizer }
-          - { project: openapi-authorizer }
           - { project: java-authorizer }
 
     name: Generate on ${{ matrix.cfg.project }}
