@@ -58,17 +58,6 @@
         },
         "type": "object"
       },
-      "authorizerv2Decision": {
-        "properties": {
-          "decision": {
-            "type": "string"
-          },
-          "is": {
-            "type": "boolean"
-          }
-        },
-        "type": "object"
-      },
       "protobufAny": {
         "additionalProperties": {},
         "properties": {
@@ -162,6 +151,17 @@
         },
         "type": "object"
       },
+      "v2Decision": {
+        "properties": {
+          "decision": {
+            "type": "string"
+          },
+          "is": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
       "v2DecisionTreeOptions": {
         "properties": {
           "path_separator": {
@@ -244,7 +244,7 @@
         "properties": {
           "decisions": {
             "items": {
-              "$ref": "#/components/schemas/authorizerv2Decision"
+              "$ref": "#/components/schemas/v2Decision"
             },
             "type": "array"
           }
