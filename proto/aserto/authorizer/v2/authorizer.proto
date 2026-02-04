@@ -5,7 +5,6 @@ package aserto.authorizer.v2;
 import "aserto/authorizer/v2/api/identity_context.proto";
 import "aserto/authorizer/v2/api/module.proto";
 import "aserto/authorizer/v2/api/policy_context.proto";
-import "aserto/authorizer/v2/api/policy_instance.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/struct.proto";
@@ -13,20 +12,11 @@ import "protoc-gen-openapiv2/options/annotations.proto";
 
 option csharp_namespace = "Aserto.Authorizer.V2";
 option go_package = "github.com/aserto-dev/go-authorizer/aserto/authorizer/v2;authorizer";
-// OpenAPI annotations.
 option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
   schemes: HTTPS
   consumes: "application/json"
   produces: "application/json"
   security_definitions: {
-    security: {
-      key: "TenantID"
-      value: {
-        type: TYPE_API_KEY
-        in: IN_HEADER
-        name: "aserto-tenant-id"
-      }
-    }
     security: {
       key: "AuthorizerAPIKey"
       value: {
@@ -39,10 +29,6 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
   security: {
     security_requirement: {
       key: "AuthorizerAPIKey"
-      value: {}
-    }
-    security_requirement: {
-      key: "TenantID"
       value: {}
     }
   }
@@ -65,10 +51,6 @@ service Authorizer {
           key: "AuthorizerAPIKey"
           value: {}
         }
-        security_requirement: {
-          key: "TenantID"
-          value: {}
-        }
       }
     };
   }
@@ -87,10 +69,6 @@ service Authorizer {
       security: {
         security_requirement: {
           key: "AuthorizerAPIKey"
-          value: {}
-        }
-        security_requirement: {
-          key: "TenantID"
           value: {}
         }
       }
@@ -113,10 +91,6 @@ service Authorizer {
           key: "AuthorizerAPIKey"
           value: {}
         }
-        security_requirement: {
-          key: "TenantID"
-          value: {}
-        }
       }
     };
   }
@@ -137,10 +111,6 @@ service Authorizer {
           key: "AuthorizerAPIKey"
           value: {}
         }
-        security_requirement: {
-          key: "TenantID"
-          value: {}
-        }
       }
     };
   }
@@ -158,10 +128,6 @@ service Authorizer {
           key: "AuthorizerAPIKey"
           value: {}
         }
-        security_requirement: {
-          key: "TenantID"
-          value: {}
-        }
       }
     };
   }
@@ -177,10 +143,6 @@ service Authorizer {
       security: {
         security_requirement: {
           key: "AuthorizerAPIKey"
-          value: {}
-        }
-        security_requirement: {
-          key: "TenantID"
           value: {}
         }
       }
@@ -211,9 +173,11 @@ message InfoResponse {
 }
 
 message GetPolicyRequest {
+  reserved 3;
+  reserved "policy_instance";
+
   string id = 1;
   google.protobuf.FieldMask field_mask = 2;
-  optional aserto.authorizer.v2.api.PolicyInstance policy_instance = 3;
 }
 
 message GetPolicyResponse {
@@ -221,8 +185,10 @@ message GetPolicyResponse {
 }
 
 message ListPoliciesRequest {
+  reserved 3;
+  reserved "policy_instance";
+
   google.protobuf.FieldMask field_mask = 1;
-  optional aserto.authorizer.v2.api.PolicyInstance policy_instance = 2;
 }
 
 message ListPoliciesResponse {
@@ -230,11 +196,13 @@ message ListPoliciesResponse {
 }
 
 message DecisionTreeRequest {
+  reserved 5;
+  reserved "policy_instance";
+
   aserto.authorizer.v2.api.PolicyContext policy_context = 1;
   aserto.authorizer.v2.api.IdentityContext identity_context = 2;
   DecisionTreeOptions options = 3;
   google.protobuf.Struct resource_context = 4;
-  optional aserto.authorizer.v2.api.PolicyInstance policy_instance = 5;
 }
 
 enum PathSeparator {
@@ -255,10 +223,12 @@ message DecisionTreeResponse {
 }
 
 message IsRequest {
+  reserved 4;
+  reserved "policy_instance";
+
   aserto.authorizer.v2.api.PolicyContext policy_context = 1;
   aserto.authorizer.v2.api.IdentityContext identity_context = 2;
   google.protobuf.Struct resource_context = 3;
-  optional aserto.authorizer.v2.api.PolicyInstance policy_instance = 4;
 }
 
 message Decision {
@@ -278,16 +248,21 @@ message QueryOptions {
 }
 
 message QueryRequest {
+  reserved 7;
+  reserved "policy_instance";
+
   string query = 1;
   string input = 2;
   optional QueryOptions options = 3;
   optional aserto.authorizer.v2.api.PolicyContext policy_context = 4;
   optional aserto.authorizer.v2.api.IdentityContext identity_context = 5;
   optional google.protobuf.Struct resource_context = 6;
-  optional aserto.authorizer.v2.api.PolicyInstance policy_instance = 7;
 }
 
 message CompileRequest {
+  reserved 9;
+  reserved "policy_instance";
+
   string query = 1;
   string input = 2;
   repeated string unknowns = 3;
@@ -296,7 +271,6 @@ message CompileRequest {
   optional aserto.authorizer.v2.api.PolicyContext policy_context = 6;
   optional aserto.authorizer.v2.api.IdentityContext identity_context = 7;
   optional google.protobuf.Struct resource_context = 8;
-  optional aserto.authorizer.v2.api.PolicyInstance policy_instance = 9;
 }
 
 message CompileResponse {

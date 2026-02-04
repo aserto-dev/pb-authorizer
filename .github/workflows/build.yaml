@@ -19,7 +19,7 @@ permissions:
   pull-requests: write
 
 env:
-  BUF_VERSION: "1.61.0"
+  BUF_VERSION: "1.64.0"
 
 jobs:
   build:
@@ -51,7 +51,6 @@ jobs:
           - { project: dotnet-authorizer }
           - { project: ruby-authorizer }
           - { project: python-authorizer }
-          - { project: openapi-authorizer }
           - { project: java-authorizer }
 
     name: Generate on ${{ matrix.cfg.project }}
