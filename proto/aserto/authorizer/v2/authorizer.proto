@@ -5,6 +5,7 @@ package aserto.authorizer.v2;
 import "aserto/authorizer/v2/api/identity_context.proto";
 import "aserto/authorizer/v2/api/module.proto";
 import "aserto/authorizer/v2/api/policy_context.proto";
+import "aserto/authorizer/v2/api/policy_instance.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/struct.proto";
@@ -194,11 +195,9 @@ message InfoResponse {
 }
 
 message GetPolicyRequest {
-  reserved 3;
-  reserved "policy_instance";
-
   string id = 1;
   google.protobuf.FieldMask field_mask = 2;
+  optional aserto.authorizer.v2.api.PolicyInstance policy_instance = 3 [deprecated = true];
 }
 
 message GetPolicyResponse {
@@ -206,10 +205,8 @@ message GetPolicyResponse {
 }
 
 message ListPoliciesRequest {
-  reserved 3;
-  reserved "policy_instance";
-
   google.protobuf.FieldMask field_mask = 1;
+  optional aserto.authorizer.v2.api.PolicyInstance policy_instance = 2 [deprecated = true];
 }
 
 message ListPoliciesResponse {
@@ -217,19 +214,17 @@ message ListPoliciesResponse {
 }
 
 message DecisionTreeRequest {
-  reserved 5;
-  reserved "policy_instance";
-
   aserto.authorizer.v2.api.PolicyContext policy_context = 1;
   aserto.authorizer.v2.api.IdentityContext identity_context = 2;
   DecisionTreeOptions options = 3;
   google.protobuf.Struct resource_context = 4;
+  optional aserto.authorizer.v2.api.PolicyInstance policy_instance = 5 [deprecated = true];
 }
 
 enum PathSeparator {
   PATH_SEPARATOR_UNKNOWN = 0; // Value not set.
   PATH_SEPARATOR_DOT = 1; // Dot "." path separator
-  PATH_SEPARATOR_SLASH = 2; // Slash "/" path separtor
+  PATH_SEPARATOR_SLASH = 2; // Slash "/" path separator
 }
 
 message DecisionTreeOptions {
@@ -244,12 +239,10 @@ message DecisionTreeResponse {
 }
 
 message IsRequest {
-  reserved 4;
-  reserved "policy_instance";
-
   aserto.authorizer.v2.api.PolicyContext policy_context = 1;
   aserto.authorizer.v2.api.IdentityContext identity_context = 2;
   google.protobuf.Struct resource_context = 3;
+  optional aserto.authorizer.v2.api.PolicyInstance policy_instance = 4 [deprecated = true];
 }
 
 message Decision {
@@ -269,21 +262,16 @@ message QueryOptions {
 }
 
 message QueryRequest {
-  reserved 7;
-  reserved "policy_instance";
-
   string query = 1;
   string input = 2;
   optional QueryOptions options = 3;
   optional aserto.authorizer.v2.api.PolicyContext policy_context = 4;
   optional aserto.authorizer.v2.api.IdentityContext identity_context = 5;
   optional google.protobuf.Struct resource_context = 6;
+  optional aserto.authorizer.v2.api.PolicyInstance policy_instance = 7 [deprecated = true];
 }
 
 message CompileRequest {
-  reserved 9;
-  reserved "policy_instance";
-
   string query = 1;
   string input = 2;
   repeated string unknowns = 3;
@@ -292,6 +280,7 @@ message CompileRequest {
   optional aserto.authorizer.v2.api.PolicyContext policy_context = 6;
   optional aserto.authorizer.v2.api.IdentityContext identity_context = 7;
   optional google.protobuf.Struct resource_context = 8;
+  optional aserto.authorizer.v2.api.PolicyInstance policy_instance = 9 [deprecated = true];
 }
 
 message CompileResponse {

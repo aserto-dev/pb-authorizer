@@ -58,6 +58,31 @@
         },
         "type": "object"
       },
+      "apiPolicyInstance": {
+        "description": "Deprecated: No longer required.",
+        "properties": {
+          "instance_label": {
+            "title": "label identifying the instance of the policy",
+            "type": "string"
+          },
+          "name": {
+            "title": "policy name",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "authorizerV2Decision": {
+        "properties": {
+          "decision": {
+            "type": "string"
+          },
+          "is": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
       "protobufAny": {
         "additionalProperties": {},
         "properties": {
@@ -113,6 +138,9 @@
           "policy_context": {
             "$ref": "#/components/schemas/apiPolicyContext"
           },
+          "policy_instance": {
+            "$ref": "#/components/schemas/apiPolicyInstance"
+          },
           "query": {
             "type": "string"
           },
@@ -151,17 +179,6 @@
         },
         "type": "object"
       },
-      "v2Decision": {
-        "properties": {
-          "decision": {
-            "type": "string"
-          },
-          "is": {
-            "type": "boolean"
-          }
-        },
-        "type": "object"
-      },
       "v2DecisionTreeOptions": {
         "properties": {
           "path_separator": {
@@ -180,6 +197,9 @@
           },
           "policy_context": {
             "$ref": "#/components/schemas/apiPolicyContext"
+          },
+          "policy_instance": {
+            "$ref": "#/components/schemas/apiPolicyInstance"
           },
           "resource_context": {
             "type": "object"
@@ -234,6 +254,9 @@
           "policy_context": {
             "$ref": "#/components/schemas/apiPolicyContext"
           },
+          "policy_instance": {
+            "$ref": "#/components/schemas/apiPolicyInstance"
+          },
           "resource_context": {
             "type": "object"
           }
@@ -244,7 +267,7 @@
         "properties": {
           "decisions": {
             "items": {
-              "$ref": "#/components/schemas/v2Decision"
+              "$ref": "#/components/schemas/authorizerV2Decision"
             },
             "type": "array"
           }
@@ -269,7 +292,7 @@
           "PATH_SEPARATOR_DOT",
           "PATH_SEPARATOR_SLASH"
         ],
-        "title": "- PATH_SEPARATOR_UNKNOWN: Value not set.\n - PATH_SEPARATOR_DOT: Dot \".\" path separator\n - PATH_SEPARATOR_SLASH: Slash \"/\" path separtor",
+        "title": "- PATH_SEPARATOR_UNKNOWN: Value not set.\n - PATH_SEPARATOR_DOT: Dot \".\" path separator\n - PATH_SEPARATOR_SLASH: Slash \"/\" path separator",
         "type": "string"
       },
       "v2QueryOptions": {
@@ -305,6 +328,9 @@
           },
           "policy_context": {
             "$ref": "#/components/schemas/apiPolicyContext"
+          },
+          "policy_instance": {
+            "$ref": "#/components/schemas/apiPolicyInstance"
           },
           "query": {
             "type": "string"
@@ -614,6 +640,22 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "description": "policy name",
+            "in": "query",
+            "name": "policy_instance.name",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "label identifying the instance of the policy",
+            "in": "query",
+            "name": "policy_instance.instance_label",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -666,6 +708,22 @@
           {
             "in": "query",
             "name": "field_mask",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "policy name",
+            "in": "query",
+            "name": "policy_instance.name",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "label identifying the instance of the policy",
+            "in": "query",
+            "name": "policy_instance.instance_label",
             "schema": {
               "type": "string"
             }

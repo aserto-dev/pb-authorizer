@@ -23,11 +23,4 @@ mkdir -p ./openapi
 ./tmp/aserto/authorizer/v2/api/decision_logs.openapi.json \
 ./tmp/aserto/authorizer/v2/api/module.openapi.json 
 
-.ext/bin/merge-json -output ./openapi/authorizer.v2.openapi.json \
-./tmp/aserto/authorizer/v2/authorizer.openapi.json \
-./tmp/aserto/authorizer/v2/api/policy_context.openapi.json \
-./tmp/aserto/authorizer/v2/api/identity_context.openapi.json \
-./tmp/aserto/authorizer/v2/api/decision_logs.openapi.json \
-./tmp/aserto/authorizer/v2/api/module.openapi.json
-
 rm -rf ./tmp
