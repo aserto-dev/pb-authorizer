@@ -14,7 +14,7 @@ type Server struct {
 	Host   string
 }
 
-//go:embed authorizer.v2.openapi.json
+//go:embed authorizer.openapi.json
 var staticString string
 
 var buildTemplate = sync.OnceValues(func() (*template.Template, error) {

@@ -11,6 +11,9 @@
 - [aserto/authorizer/v2/api/policy_context.proto](#aserto_authorizer_v2_api_policy_context-proto)
     - [PolicyContext](#aserto-authorizer-v2-api-PolicyContext)
   
+- [aserto/authorizer/v2/api/policy_instance.proto](#aserto_authorizer_v2_api_policy_instance-proto)
+    - [PolicyInstance](#aserto-authorizer-v2-api-PolicyInstance)
+  
 - [aserto/authorizer/v2/api/decision_logs.proto](#aserto_authorizer_v2_api_decision_logs-proto)
     - [Decision](#aserto-authorizer-v2-api-Decision)
     - [Decision.AnnotationsEntry](#aserto-authorizer-v2-api-Decision-AnnotationsEntry)
@@ -128,6 +131,38 @@ Identity types, describes the payload type of the identity field inside the Iden
 
 
 
+<a name="aserto_authorizer_v2_api_policy_instance-proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## aserto/authorizer/v2/api/policy_instance.proto
+
+
+
+<a name="aserto-authorizer-v2-api-PolicyInstance"></a>
+
+### PolicyInstance
+Deprecated: No longer required.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | **Deprecated.** policy name |
+| instance_label | [string](#string) |  | **Deprecated.** label identifying the instance of the policy |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
 <a name="aserto_authorizer_v2_api_decision_logs-proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
@@ -202,6 +237,7 @@ information about a policy used in a decision
 | registry_image | [string](#string) |  | image of the policy in the registry, including org (e.g. acmecorp/peoplefinder-abac) |
 | registry_tag | [string](#string) |  | tag of the policy image (e.g. 0.8.2 or latest) |
 | registry_digest | [string](#string) |  | digest of the policy image |
+| policy_instance | [PolicyInstance](#aserto-authorizer-v2-api-PolicyInstance) |  | **Deprecated.** policy instance used in decision |
 
 
 
@@ -292,6 +328,7 @@ information about a user on behalf of whom a decision was made
 | policy_context | [api.PolicyContext](#aserto-authorizer-v2-api-PolicyContext) | optional |  |
 | identity_context | [api.IdentityContext](#aserto-authorizer-v2-api-IdentityContext) | optional |  |
 | resource_context | [google.protobuf.Struct](#google-protobuf-Struct) | optional |  |
+| policy_instance | [api.PolicyInstance](#aserto-authorizer-v2-api-PolicyInstance) | optional | **Deprecated.**  |
 
 
 
@@ -359,6 +396,7 @@ information about a user on behalf of whom a decision was made
 | identity_context | [api.IdentityContext](#aserto-authorizer-v2-api-IdentityContext) |  |  |
 | options | [DecisionTreeOptions](#aserto-authorizer-v2-DecisionTreeOptions) |  |  |
 | resource_context | [google.protobuf.Struct](#google-protobuf-Struct) |  |  |
+| policy_instance | [api.PolicyInstance](#aserto-authorizer-v2-api-PolicyInstance) | optional | **Deprecated.**  |
 
 
 
@@ -391,6 +429,7 @@ information about a user on behalf of whom a decision was made
 | ----- | ---- | ----- | ----------- |
 | id | [string](#string) |  |  |
 | field_mask | [google.protobuf.FieldMask](#google-protobuf-FieldMask) |  |  |
+| policy_instance | [api.PolicyInstance](#aserto-authorizer-v2-api-PolicyInstance) | optional | **Deprecated.**  |
 
 
 
@@ -452,6 +491,7 @@ information about a user on behalf of whom a decision was made
 | policy_context | [api.PolicyContext](#aserto-authorizer-v2-api-PolicyContext) |  |  |
 | identity_context | [api.IdentityContext](#aserto-authorizer-v2-api-IdentityContext) |  |  |
 | resource_context | [google.protobuf.Struct](#google-protobuf-Struct) |  |  |
+| policy_instance | [api.PolicyInstance](#aserto-authorizer-v2-api-PolicyInstance) | optional | **Deprecated.**  |
 
 
 
@@ -482,6 +522,7 @@ information about a user on behalf of whom a decision was made
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | field_mask | [google.protobuf.FieldMask](#google-protobuf-FieldMask) |  |  |
+| policy_instance | [api.PolicyInstance](#aserto-authorizer-v2-api-PolicyInstance) | optional | **Deprecated.**  |
 
 
 
@@ -535,6 +576,7 @@ information about a user on behalf of whom a decision was made
 | policy_context | [api.PolicyContext](#aserto-authorizer-v2-api-PolicyContext) | optional |  |
 | identity_context | [api.IdentityContext](#aserto-authorizer-v2-api-IdentityContext) | optional |  |
 | resource_context | [google.protobuf.Struct](#google-protobuf-Struct) | optional |  |
+| policy_instance | [api.PolicyInstance](#aserto-authorizer-v2-api-PolicyInstance) | optional | **Deprecated.**  |
 
 
 
@@ -570,7 +612,7 @@ information about a user on behalf of whom a decision was made
 | ---- | ------ | ----------- |
 | PATH_SEPARATOR_UNKNOWN | 0 | Value not set. |
 | PATH_SEPARATOR_DOT | 1 | Dot &#34;.&#34; path separator |
-| PATH_SEPARATOR_SLASH | 2 | Slash &#34;/&#34; path separtor |
+| PATH_SEPARATOR_SLASH | 2 | Slash &#34;/&#34; path separator |
 
 
 
